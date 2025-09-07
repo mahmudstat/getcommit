@@ -7,6 +7,10 @@
 #' @param to Character or Date. Optional end date (ISO 8601 or "YYYY-MM-DD").
 #' @return A tibble with columns: sha, author, date, message
 #' @export
+#' @examples
+#' \dontrun{
+#' get_commits("mahmudstat/clockplot", n = 20, from = "2025-07-01", to = "2025-09-02")
+#' }
 get_commits <- function(repo, n = 100, branch = "main", from = NULL, to = NULL) {
   if (!requireNamespace("gh", quietly = TRUE)) {
     stop("Package 'gh' is required. Please install it first.")
