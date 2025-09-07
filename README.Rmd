@@ -1,0 +1,64 @@
+---
+output: github_document
+always_allow_html: true
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# getcommit
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of **getcommit** is to provide a simple interface for retrieving commit history from GitHub repositories and analyzing developer activity over time.  
+
+With **getcommit**, you can:  
+- Fetch recent commits from any public GitHub repository.  
+- Filter commits by branch, date range, or number of commits.  
+- Export commit history to a tidy data frame or CSV.  
+- Visualize commit activity (e.g., by date, author, or time of day) in R.  
+
+## Installation
+
+You can install the development version of getcommit from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("pak")
+pak::pak("mahmudstat/getcommit")
+```
+
+## Examples
+
+Let us see some commits from the `dplyr` package of the `tidyverse` ecosystem. 
+
+```{r get_list}
+library(getcommit)
+comm <- get_commits("tidyverse/dplyr", n = 30, from = "2024-05-15", to = "2025-09-02")
+head(comm[-1])
+```
+
+## Viewing the commits on the clockplot
+
+```{r plot_list}
+library(clockplot)
+library(dplyr)
+library(hms)
+comm <- comm %>%
+  mutate(hms = hms::as_hms(date))
+# Step 2: Plot with clockplot
+clock_chart_qlt(
+  comm,
+  time = hms,
+  crit = author
+)
+```
+
