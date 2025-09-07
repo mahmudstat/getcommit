@@ -5,12 +5,10 @@
 #' @param branch Character. Branch name. Default "main".
 #' @param from Character or Date. Optional start date (ISO 8601 or "YYYY-MM-DD").
 #' @param to Character or Date. Optional end date (ISO 8601 or "YYYY-MM-DD").
-#' @return A tibble with columns: sha, author, date, message
+#' @return A tibble with columns: sha, author, date-time (UTC), message
 #' @export
 #' @examples
-#' \dontrun{
 #' get_commits("mahmudstat/clockplot", n = 20, from = "2025-07-01", to = "2025-09-02")
-#' }
 get_commits <- function(repo, n = 100, branch = "main", from = NULL, to = NULL) {
   if (!requireNamespace("gh", quietly = TRUE)) {
     stop("Package 'gh' is required. Please install it first.")
@@ -44,13 +42,13 @@ get_commits <- function(repo, n = 100, branch = "main", from = NULL, to = NULL) 
 
   # Extract relevant info
   tibble::tibble(
-    sha = vapply(commits, function(x) x$sha, character(1)),
     author = vapply(commits, function(x) x$commit$author$name, character(1)),
     date = as.POSIXct(
       vapply(commits, function(x) x$commit$author$date, character(1)),
       format = "%Y-%m-%dT%H:%M:%SZ",
       tz = "UTC"
     ),
-    message = vapply(commits, function(x) x$commit$message, character(1))
+    message = vapply(commits, function(x) x$commit$message, character(1)),
+    sha = vapply(commits, function(x) x$sha, character(1))
   )
 }

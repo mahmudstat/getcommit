@@ -18,13 +18,11 @@ get_commits(repo, n = 100, branch = "main", from = NULL, to = NULL)
 \item{to}{Character or Date. Optional end date (ISO 8601 or "YYYY-MM-DD").}
 }
 \value{
-A tibble with columns: sha, author, date, message
+A tibble with columns: sha, author, date-time (UTC), message
 }
 \description{
 Get recent commits from a GitHub repository
 }
 \examples{
-\dontrun{
 get_commits("mahmudstat/clockplot", n = 20, from = "2025-07-01", to = "2025-09-02")
-}
 }

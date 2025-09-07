@@ -43,7 +43,15 @@ Let us see some commits from the `dplyr` package of the `tidyverse` ecosystem.
 ```{r get_list}
 library(getcommit)
 comm <- get_commits("tidyverse/dplyr", n = 30, from = "2024-05-15", to = "2025-09-02")
-head(comm[-1])
+head(comm)
+```
+
+## Commits by Mahedi Bhai
+
+```{r mahedi}
+library(getcommit)
+comm <- get_commits("Mahedi-61/Mahedi-61.github.io", n = 25, from = "2021-01-11", to = "2025-09-02")
+head(comm)
 ```
 
 ## Viewing the commits on the clockplot
