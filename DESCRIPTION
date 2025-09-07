@@ -6,7 +6,9 @@ Authors@R:
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 Imports:
+    dplyr,
     gh,
+    lubridate,
     tibble
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
