@@ -17,7 +17,7 @@
 #' plot_commits(comm, crit = "author", type = "clock")
 #'
 #' # Plot as line chart grouped by author
-#' plot_commits(comm, type = "line")
+#' plot_commits(comm, type = "bar")
 #' }
 plot_commits <- function(df, crit = "author", type = "clock") {
   if (!requireNamespace("dplyr", quietly = TRUE)) stop("dplyr required")
@@ -28,19 +28,20 @@ plot_commits <- function(df, crit = "author", type = "clock") {
     dplyr::mutate(hms = hms::as_hms(date))
 
   crit_sym <- rlang::ensym(crit)
-  crit_title <- tools::toTitleCase(crit)  # convert to title case
+  crit_title <- tools::toTitleCase(crit)
 
   if (type == "clock") {
     clockplot::clock_chart_qlt(df, time = hms, crit = !!crit_sym) +
-      ggplot2::labs(color = crit_title)  # set legend title
-  } else if (type == "line") {
+      ggplot2::labs(color = crit_title) +
+      ggplot2::scale_color_discrete(name = crit_title)   # <-- force legend
+  } else if (type == "bar") {
     df %>%
       dplyr::mutate(hour = as.numeric(format(date, "%H"))) %>%
       dplyr::count(!!crit_sym, hour) %>%
       ggplot2::ggplot(ggplot2::aes(x = hour, y = n, fill = !!crit_sym)) +
       ggplot2::geom_bar(stat = "identity") +
-      ggplot2::labs(x = "Hour of day", y = "Number of commits", color = crit_title)
+      ggplot2::labs(x = "Hour of day", y = "Number of commits", fill = crit_title)
   } else {
-    stop("Invalid type: must be 'clock' or 'line'")
+    stop("Invalid type: must be 'clock' or 'bar'")
   }
 }

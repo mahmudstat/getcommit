@@ -31,6 +31,6 @@ comm <- get_commits("tidyverse/dplyr", n = 50)
 plot_commits(comm, crit = "author", type = "clock")
 
 # Plot as line chart grouped by author
-plot_commits(comm, crit = "author", type = "line")
+plot_commits(comm, type = "bar")
 }
 }
