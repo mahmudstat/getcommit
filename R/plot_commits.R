@@ -1,9 +1,13 @@
-#' Plot GitHub commits as clock or line chart
+#' Plot GitHub commits as clock or bar chart
 #'
 #' @param df Data frame from get_commits(), must contain datetime column `date` or `dttm`
 #' @param crit Character. Column name to group/colour by (default "author")
-#' @param type Character. "clock" or "line" (default "clock")
+#' @param type Character. "clock" or "bar" (default "clock")
 #' @return ggplot object
+#' @import dplyr
+#' @import ggplot2
+#' @importFrom hms as_hms
+#' @import clockplot
 #' @export
 #' @examples
 #' \dontrun{
@@ -16,7 +20,7 @@
 #' # Plot as clockplot grouped by author
 #' plot_commits(comm, crit = "author", type = "clock")
 #'
-#' # Plot as line chart grouped by author
+#' # Plot as bar chart grouped by author
 #' plot_commits(comm, type = "bar")
 #' }
 plot_commits <- function(df, crit = "author", type = "clock") {

@@ -12,6 +12,9 @@ Imports:
     dplyr,
     gh,
     lubridate,
+    hms,
+    ggplot2,
+    clockplot,
     rlang,
     tibble,
     tools

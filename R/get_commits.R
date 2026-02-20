@@ -6,6 +6,8 @@
 #' @param from Character or Date. Optional start date (ISO 8601 or "YYYY-MM-DD").
 #' @param to Character or Date. Optional end date (ISO 8601 or "YYYY-MM-DD").
 #' @return A tibble with columns: sha, author, date-time (UTC), message
+#' @importFrom tibble tibble
+#' @importFrom gh gh
 #' @export
 #' @examples
 #' get_commits("mahmudstat/clockplot", n = 20, from = "2025-07-01", to = "2025-09-02")

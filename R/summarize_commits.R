@@ -5,7 +5,8 @@
 #' @param df A tibble returned by [get_commits()].
 #' @param by A character vector specifying grouping variables.
 #'   Choices are `"author"`, `"year"`, `"month"`, `"day"`, or `"hour"`.
-#'
+#' @import dplyr
+#' @import lubridate
 #' @return A tibble with counts per group.
 #'
 #' @examples

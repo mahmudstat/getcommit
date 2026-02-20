@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_commits.R
 \name{plot_commits}
 \alias{plot_commits}
-\title{Plot GitHub commits as clock or line chart}
+\title{Plot GitHub commits as clock or bar chart}
 \usage{
 plot_commits(df, crit = "author", type = "clock")
 }
@@ -11,13 +11,13 @@ plot_commits(df, crit = "author", type = "clock")
 
 \item{crit}{Character. Column name to group/colour by (default "author")}
 
-\item{type}{Character. "clock" or "line" (default "clock")}
+\item{type}{Character. "clock" or "bar" (default "clock")}
 }
 \value{
 ggplot object
 }
 \description{
-Plot GitHub commits as clock or line chart
+Plot GitHub commits as clock or bar chart
 }
 \examples{
 \dontrun{
@@ -30,7 +30,7 @@ comm <- get_commits("tidyverse/dplyr", n = 50)
 # Plot as clockplot grouped by author
 plot_commits(comm, crit = "author", type = "clock")
 
-# Plot as line chart grouped by author
+# Plot as bar chart grouped by author
 plot_commits(comm, type = "bar")
 }
 }
